@@ -143,19 +143,11 @@ app.get("/", async (req: Request, res: Response) => {
          buscou por "${name}".
         Code: ${req.statusCode} - Message: ${req.statusMessage} - Complete: ${req.complete}`);
         let logTest = () => {
-            for (const coisa of req.route) {
-                console.log(coisa);
-            }
-
             for (const coisa of Object(req.params)) {
                 console.log(coisa);
             }
         };
-        for (const coisa of req.route) {
-            () => {
-                console.log(coisa);
-            };
-        }
+
         logTest();
         return res.status(200).send({
             message: "ok",
