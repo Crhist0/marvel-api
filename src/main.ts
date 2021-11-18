@@ -155,4 +155,4 @@ app.get("/", async (req: Request, res: Response) => {
     }
 });
 
-app.listen(8081, () => console.log("Server is running..."));
+app.listen(process.env.PORT || 8081, () => console.log("Server is running..."));
