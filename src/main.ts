@@ -174,7 +174,7 @@ app.get("/:id", async (req: Request, res: Response) => {
         });
         console.log(spyApi(req, id));
 
-        let character = apiResponse.data.results;
+        let character = apiResponse.data.data.results;
         console.log(character);
         let bottomMessageHTML = `
     <a href=\"http://marvel.com\" class='text-center'>${apiResponse.data.attributionText}</a>`;
