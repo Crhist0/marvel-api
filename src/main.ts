@@ -140,20 +140,15 @@ app.get("/", async (req: Request, res: Response) => {
             };
         });
         console.log(`
-                ip: ${req.ip}
-                ips: ${req.ips}
-                busca: ${name}
-                rota: ${req.route}
-                metodo: ${req.method}
-                code: ${req.statusCode}
-                message: ${req.statusMessage}
-                url: ${req.url}
-                baseUrl: ${req.baseUrl}
-                protocol: ${req.protocol}
-                path: ${req.path}
-                params: ${req.params}
-                complete?: ${req.complete}
-                `);
+        O usuário de IP ${req.ip}, através de um ${req.method} na URL "${req.url}${req.path}" pelo protocolo "${req.protocol}", buscou por "${name}".
+        Code: ${req.statusCode} - Message: ${req.statusMessage} - Complete: ${req.complete}
+        `);
+        for (const coisa of req.route) {
+            console.log(coisa);
+        }
+        for (const coisa of Object(req.params)) {
+            console.log(coisa);
+        }
         return res.status(200).send({
             message: "ok",
             data: characters,
