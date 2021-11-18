@@ -122,13 +122,14 @@ app.get("/", async (req: Request, res: Response) => {
             let urlDetail = getUrl(character.urls, "detail");
             let urlWiki = getUrl(character.urls, "wiki");
             let urlComiclink = getUrl(character.urls, "comiclink");
+            console.log(character.description);
 
             return {
                 id: character.id,
                 name: character.name,
                 thumbnail: character.thumbnail.path.toString() + "." + character.thumbnail.extension.toString(),
                 comics: character.comics.available,
-                description: character.description,
+                description: character.description == "" ? `Description not found.` : character.description,
                 lastModified: d + "/" + m + "/" + y,
                 comicsList: character.comics.items,
                 seriesList: character.series.items,
