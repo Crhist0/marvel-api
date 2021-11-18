@@ -160,20 +160,22 @@ app.get("/", async (req: Request, res: Response) => {
 
 app.get("/:id", async (req: Request, res: Response) => {
     try {
-        const page: number = req.query.page ? Number(req.query.page as string) : 1;
-        const limit: number = req.query.limit ? Number(req.query.limit as string) : 10;
-        const offset = limit * (page - 1);
+        // const page: number = req.query.page ? Number(req.query.page as string) : 1;
+        // const limit: number = req.query.limit ? Number(req.query.limit as string) : 10;
+        // const offset = limit * (page - 1);
         const id = req.params.id;
         const apiResponse = await apiMarvel.get(`/characters/${id}`, {
             params: {
                 ...createAuth(),
-                limit,
-                offset,
+                // limit,
+                // offset,
                 // characterId: id,
             },
         });
         console.log(spyApi(req, id));
+
         let character = apiResponse.data.results;
+        console.log(character);
         let bottomMessageHTML = `
     <a href=\"http://marvel.com\" class='text-center'>${apiResponse.data.attributionText}</a>`;
 
