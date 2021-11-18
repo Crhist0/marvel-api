@@ -122,21 +122,6 @@ app.get("/", async (req: Request, res: Response) => {
             let urlDetail = getUrl(character.urls, "detail");
             let urlWiki = getUrl(character.urls, "wiki");
             let urlComiclink = getUrl(character.urls, "comiclink");
-            console.log(`
-                ip: ${req.ip}
-                ips: ${req.ips}
-                busca: ${name}
-                rota: ${req.route}
-                metodo: ${req.method}
-                code: ${req.statusCode}
-                message: ${req.statusMessage}
-                url: ${req.url}
-                baseUrl: ${req.baseUrl}
-                protocol: ${req.protocol}
-                path: ${req.path}
-                params: ${req.params}
-                complete?: ${req.complete}
-                `);
 
             return {
                 id: character.id,
@@ -154,7 +139,21 @@ app.get("/", async (req: Request, res: Response) => {
                 comiclink: urlComiclink,
             };
         });
-
+        console.log(`
+                ip: ${req.ip}
+                ips: ${req.ips}
+                busca: ${name}
+                rota: ${req.route}
+                metodo: ${req.method}
+                code: ${req.statusCode}
+                message: ${req.statusMessage}
+                url: ${req.url}
+                baseUrl: ${req.baseUrl}
+                protocol: ${req.protocol}
+                path: ${req.path}
+                params: ${req.params}
+                complete?: ${req.complete}
+                `);
         return res.status(200).send({
             message: "ok",
             data: characters,
