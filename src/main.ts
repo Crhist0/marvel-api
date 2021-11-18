@@ -164,7 +164,7 @@ app.get("/", async (req: Request, res: Response) => {
         const limit: number = req.query.limit ? Number(req.query.limit as string) : 10;
         const offset = limit * (page - 1);
         const id = req.query.id ? (req.query.id as string) : undefined;
-        const apiResponse = await apiMarvel.get("/characters/:characterId", {
+        const apiResponse = await apiMarvel.get("/characters/", {
             params: {
                 ...createAuth(),
                 limit,
