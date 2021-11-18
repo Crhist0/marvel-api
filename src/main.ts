@@ -139,16 +139,10 @@ app.get("/", async (req: Request, res: Response) => {
                 comiclink: urlComiclink,
             };
         });
-        console.log(`O usuário de IP ${req.ip}, através de um ${req.method} na URL "${req.url}${req.path}" pelo protocolo "${req.protocol}",
-         buscou por "${name}".
+        console.log(`O usuário de IP "${req.ip}", 
+        buscou por "${name}".
+        via "${req.method}" na URL "${req.url}${req.path}" por protocolo "${req.protocol}",
         Code: ${req.statusCode} - Message: ${req.statusMessage} - Complete: ${req.complete}`);
-        let logTest = () => {
-            for (const coisa of Object(req.params)) {
-                console.log(coisa);
-            }
-        };
-
-        logTest();
         return res.status(200).send({
             message: "ok",
             data: characters,
