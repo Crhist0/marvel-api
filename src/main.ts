@@ -24,19 +24,22 @@ function createAuth() {
     };
 }
 
+function spyApi(req: Request, searchTerm: string | undefined) {
+    console.log(`O usuário de IP "${req.ip}", 
+        buscou por "${searchTerm}".
+        via "${req.method}" na URL "${req.url}${req.path}" por protocolo "${req.protocol}",
+        Code: ${req.statusCode} - Message: ${req.statusMessage} - Complete: ${req.complete}`);
+}
+
 // offset = quanto por pagina
 // page = pagina
 
 app.get("/", async (req: Request, res: Response) => {
     try {
         const page: number = req.query.page ? Number(req.query.page as string) : 1;
-
         const limit: number = req.query.limit ? Number(req.query.limit as string) : 10;
-
         const offset = limit * (page - 1);
-
         const name = req.query.name ? (req.query.name as string) : undefined;
-
         const apiResponse = await apiMarvel.get("/characters", {
             params: {
                 ...createAuth(),
@@ -45,6 +48,7 @@ app.get("/", async (req: Request, res: Response) => {
                 nameStartsWith: name,
             },
         });
+        console.log(spyApi(req, name));
 
         let characters = apiResponse.data.data.results;
         let bottomMessageHTML = `
@@ -139,15 +143,42 @@ app.get("/", async (req: Request, res: Response) => {
                 comiclink: urlComiclink,
             };
         });
-        console.log(`O usuário de IP "${req.ip}", 
-        buscou por "${name}".
-        via "${req.method}" na URL "${req.url}${req.path}" por protocolo "${req.protocol}",
-        Code: ${req.statusCode} - Message: ${req.statusMessage} - Complete: ${req.complete}`);
+
         return res.status(200).send({
             message: "ok",
             data: characters,
             searchResults,
             detailsPageResults,
+            copy: bottomMessageHTML,
+        });
+    } catch (err: any) {
+        return res.status(500).send({
+            message: err.toString(),
+        });
+    }
+});
+
+app.get("/", async (req: Request, res: Response) => {
+    try {
+        const page: number = req.query.page ? Number(req.query.page as string) : 1;
+        const limit: number = req.query.limit ? Number(req.query.limit as string) : 10;
+        const offset = limit * (page - 1);
+        const id = req.query.id ? (req.query.id as string) : undefined;
+        const apiResponse = await apiMarvel.get("/characters/:characterId", {
+            params: {
+                ...createAuth(),
+                limit,
+                offset,
+                characterId: id,
+            },
+        });
+        console.log(spyApi(req, id));
+        let character = apiResponse.data.data.results;
+        let bottomMessageHTML = `
+    <a href=\"http://marvel.com\" class='text-center'>${apiResponse.data.attributionText}</a>`;
+        return res.status(200).send({
+            message: "ok",
+            data: character,
             copy: bottomMessageHTML,
         });
     } catch (err: any) {
