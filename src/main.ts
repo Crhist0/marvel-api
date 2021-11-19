@@ -197,7 +197,7 @@ app.get("/comics/:id", async (req: Request, res: Response) => {
         const limit: number = req.query.limit ? Number(req.query.limit as string) : 10;
         const offset = limit * (page - 1);
         const id = req.params.id;
-        const apiResponse = await apiMarvel.get(`/characters/${id}`, {
+        const apiResponse = await apiMarvel.get(`/characters/${id}/comics`, {
             params: {
                 ...createAuth(),
                 limit,
