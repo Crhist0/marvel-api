@@ -191,7 +191,7 @@ app.get("/:id", async (req: Request, res: Response) => {
     }
 });
 
-app.get("/comics/:id", async (req: Request, res: Response) => {
+app.get("/comics/:id:page", async (req: Request, res: Response) => {
     try {
         const page: number = req.query.page ? Number(req.query.page as string) : 1;
         const limit: number = req.query.limit ? Number(req.query.limit as string) : 10;
