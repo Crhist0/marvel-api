@@ -194,10 +194,16 @@ app.get("/:id", async (req: Request, res: Response) => {
 app.get("/comics/:id", async (req: Request, res: Response) => {
     try {
         const page: number = req.query.page ? Number(req.query.page as string) : 1;
+
+        console.log("page:");
         console.log(page);
+
         const limit: number = 10;
         const offset = limit * (page - 1);
+
+        console.log("offset:");
         console.log(offset);
+
         const id = req.params.id;
         const apiResponse = await apiMarvel.get(`/characters/${id}/comics`, {
             params: {
