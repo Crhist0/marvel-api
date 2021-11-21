@@ -36,8 +36,12 @@ function spyApi(req: Request, searchTerm: string | undefined) {
 
 app.get("/", async (req: Request, res: Response) => {
     try {
+        console.log("req.query abaixo:");
+        console.log(req.query);
         const page: number = req.query.page ? Number(req.query.page as string) : 1;
         const limit: number = req.query.limit ? Number(req.query.limit as string) : 25;
+        console.log(`limit é = ${limit}`);
+
         const offset = limit * (page - 1);
         const name = req.query.name ? (req.query.name as string) : undefined;
         const apiResponse = await apiMarvel.get("/characters", {
