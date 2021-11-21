@@ -55,6 +55,7 @@ app.get("/", async (req: Request, res: Response) => {
         console.log(spyApi(req, name));
 
         let characters = apiResponse.data.data.results;
+        let characters2 = apiResponse.data.data.total;
         let bottomMessageHTML = `
         <a href=\"http://marvel.com\" class='text-center'>${apiResponse.data.attributionText}</a>`;
         // tentativa de pegar resources
@@ -151,6 +152,7 @@ app.get("/", async (req: Request, res: Response) => {
         return res.status(200).send({
             message: "ok",
             data: characters,
+            data2: characters2,
             searchResults,
             detailsPageResults,
             copy: bottomMessageHTML,
