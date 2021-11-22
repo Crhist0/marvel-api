@@ -43,6 +43,9 @@ app.get("/", async (req: Request, res: Response) => {
         console.log(`limit é = ${limit}`);
 
         const offset = limit * (page - 1);
+        console.log(`
+        offset: ${offset}`);
+
         const name = req.query.name ? (req.query.name as string) : undefined;
         const apiResponse = await apiMarvel.get("/characters", {
             params: {
