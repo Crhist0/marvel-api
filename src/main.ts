@@ -146,6 +146,7 @@ app.get("/", async (req: Request, res: Response) => {
                 seriesList: character.series.items,
                 storiesList: character.stories.items,
                 eventsList: character.events.items,
+                urls: character.urls,
                 details: urlDetail,
                 wiki: urlWiki,
                 comiclink: urlComiclink,
